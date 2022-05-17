@@ -6,10 +6,6 @@ http://tkdocs.com/index.html
 from tkinter import *
 from tkinter import ttk
 
-def init_buttons():
-	button_0 = Button(root, text='0')
-	button_1 = Button(root, text='1')
-
 
 # The root or main window holding all widgets 
 root = Tk()
@@ -25,15 +21,32 @@ for row in range(3):
 for col in range(3):
 	root.grid_columnconfigure(col, weight = 1)
 
+
 def clear():
+	"""
+    clear functions removes all values 
+    from the entry field
+    """ 
 	entry.delete(0, END)
 
 def update_input(num):
+	"""
+    update_input functions adds a binary 
+    number to the end of the entry field
+    while presever current values in the field. 
+
+    :param num: either 0 or 1
+    """ 
 	current_num  = entry.get()
 	entry.delete(0, END)
 	entry.insert(0, str(current_num) + str(num))
 
 def addition():
+	"""
+    will set the operator to addition and
+    store the current entry field number
+    into global variable
+    """ 
 	global first_num
 	global operator
 	operator = "ADDITION"
@@ -42,6 +55,11 @@ def addition():
 	first_num = current_num
 
 def subtraction():
+	"""
+    will set th eoperator to subtraction and
+    store the current entry field number into
+    global variable
+    """ 
 	global first_num
 	global operator
 	operator = "SUBTRACTION"
@@ -50,6 +68,11 @@ def subtraction():
 	first_num = current_num
 	
 def equal():
+	"""
+    based on operator will perform the 
+    appropriate calculator function and
+    update entry field with result
+    """ 
 	current_num = str(entry.get())
 	entry.delete(0, END)
 	if operator == "ADDITION":
@@ -59,6 +82,7 @@ def equal():
 
 	entry.insert(0, answer[2:])
 
+# create the necessary widgets for the app
 entry = Entry(root, text="Enter number", relief="sunken", justify="center")
 
 button_0 = Button(root, text='0', command=lambda: update_input(0))
@@ -69,6 +93,7 @@ button_minus = Button(root, text='-', command=subtraction)
 button_plus = Button(root, text='+', command=addition)
 button_equal = Button(root, text='=', command=equal)
 
+# display the widgets as desired using grid system
 entry.grid(row=0, column=0, columnspan=3,  sticky="NESW")
 
 button_0.grid(row=1, column=0, sticky="NESW")
